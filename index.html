@@ -177,47 +177,42 @@ set:function(a){this.g.height=a}},width:{configurable:!0,enumerable:!0,get:funct
     </gwd-pagedeck>
     <gwd-exit metric="Clicktag" url="https://www.cruisecritic.com/infotorial/2024/medjet-sept-2024-us"></gwd-exit>
   </gwd-google-ad>
-  <script type="text/javascript" id="gwd-init-code">
-    (function() {
-      var gwdAd = document.getElementById('gwd-ad');
+<script type="text/javascript" id="gwd-init-code">
+        (function() {
+          var gwdAd = document.getElementById('gwd-ad');
 
-      /**
-       * Handles the DOMContentLoaded event. The DOMContentLoaded event is
-       * fired when the document has been completely loaded and parsed.
-       */
-      function handleDomContentLoaded(event) {
+          function handleDomContentLoaded(event) {}
 
-      }
+          function handleWebComponentsReady(event) {
+            requestAnimationFrame(function() {
+              setTimeout(function() {
+                gwdAd.initAd();
+              }, 1);
+            });
+          }
 
-      /**
-       * Handles the WebComponentsReady event. This event is fired when all
-       * custom elements have been registered and upgraded.
-       */
-      function handleWebComponentsReady(event) {
-        // Start the Ad lifecycle.
-        requestAnimationFrame(function() {
-          setTimeout(function() {
-            gwdAd.initAd();
-          }, 1);
-        });
-      }
+          function handleAdInitialized(event) {}
 
-      /**
-       * Handles the event that is dispatched after the Ad has been
-       * initialized and before the default page of the Ad is shown.
-       */
-      function handleAdInitialized(event) {}
+          window.addEventListener('DOMContentLoaded', handleDomContentLoaded, false);
+          window.addEventListener('WebComponentsReady', handleWebComponentsReady, false);
+          window.addEventListener('adinitialized', handleAdInitialized, false);
 
-      window.addEventListener('DOMContentLoaded',
-        handleDomContentLoaded, false);
-      window.addEventListener('WebComponentsReady',
-        handleWebComponentsReady, false);
-      window.addEventListener('adinitialized',
-        handleAdInitialized, false);
-    })();
-  </script>
+          // Send impression to parent window
+          window.parent.postMessage({ type: 'iframe-impression', src: window.location.href }, '*');
 
+          // Track click event
+          document.addEventListener('click', function() {
+              window.parent.postMessage({ type: 'iframe-click', src: window.location.href }, '*');
+          });
+        })();
+    </script>
 
-<script data-exports-type="gwd-studio-registration">function StudioExports() {
-Enabler.exit("Clicktag", "https://www.cruisecritic.com/infotorial/2024/medjet-sept-2024-us");
-}</script><script type="text/gwd-admetadata">{"version":1,"type":"GoogleAd","format":"","template":"Banner 3.0.0","politeload":true,"fullscreen":false,"counters":[],"timers":[],"exits":[{"exitId":"Clicktag","url":"https://www.cruisecritic.com/infotorial/2024/medjet-sept-2024-us"}],"creativeProperties":{"minWidth":970,"minHeight":90,"maxWidth":970,"maxHeight":90},"components":["gwd-google-ad","gwd-image","gwd-page","gwd-pagedeck"],"responsive":false}</script></body></html>
+    <script data-exports-type="gwd-studio-registration">
+        function StudioExports() {
+            Enabler.exit("Clicktag", "https://www.cruisecritic.com/infotorial/2024/medjet-sept-2024-us");
+        }
+    </script>
+
+    <script type="text/gwd-admetadata">
+        {"version":1,"type":"GoogleAd","format":"","template":"Banner 3.0.0","politeload":true,"fullscreen":false,"counters":[],"timers":[],"exits":[{"exitId":"Clicktag","url":"https://www.cruisecritic.com/infotorial/2024/medjet-sept-2024-us"}],"creativeProperties":{"minWidth":970,"minHeight":90,"maxWidth":970,"maxHeight":90},"components":["gwd-google-ad","gwd-image","gwd-page","gwd-pagedeck"],"responsive":false}
+    </script></body></html>
